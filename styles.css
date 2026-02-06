@@ -1,0 +1,165 @@
+/* --- 1. POLICE & DESIGN SYSTEM --- */
+
+/* Importation de la police Red Hat Display depuis les serveurs de Google */
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap");
+
+/* Définition des variables : permet de changer une couleur partout en une seule modif */
+:root {
+  --Blue-100: hsl(225, 100%, 94%); /* Couleur de fond de la page */
+  --Blue-700: hsl(245, 75%, 52%); /* Bleu principal (bouton et lien) */
+  --Blue-50: hsl(225, 100%, 98%); /* Bleu très clair (fond du bloc plan) */
+  --Gray-600: hsl(224, 23%, 55%); /* Gris pour le texte secondaire */
+  --Blue-950: hsl(223, 47%, 23%); /* Bleu foncé pour les titres et boutons */
+  --White: hsl(0, 0%, 100%); /* Blanc pur pour la carte */
+}
+
+/* --- 2. RESET & BASE --- */
+
+/* Sélecteur universel pour uniformiser le comportement des navigateurs */
+* {
+  box-sizing: border-box; /* Force le calcul de la taille incluant padding et bordures */
+  margin: 0; /* Supprime les marges extérieures par défaut */
+  padding: 0; /* Supprime les espacements intérieurs par défaut */
+}
+
+/* Configuration du corps de page */
+body {
+  font-family:
+    "Red Hat Display", sans-serif; /* Application de la police principale */
+  background-color: var(--Blue-100); /* Couleur de secours du fond */
+  background-image: url("images/pattern-background-mobile.svg"); /* Image de fond (vague) mobile */
+  background-repeat: no-repeat; /* L'image ne doit pas se dupliquer */
+  background-size: contain; /* L'image s'étire pour remplir la largeur sans être rognée */
+  display: flex; /* Utilise Flexbox pour le positionnement */
+  justify-content: center; /* Centre la carte horizontalement */
+  align-items: center; /* Centre la carte verticalement */
+  min-height: 100vh; /* La page fait au moins toute la hauteur de l'écran */
+  color: var(--Gray-600); /* Couleur de texte par défaut pour toute la page */
+  line-height: 1.5em; /* Augmente l'espace entre les lignes pour le confort de lecture */
+}
+
+/* --- 3. STRUCTURE DE LA CARTE --- */
+
+/* Le conteneur principal du composant */
+.card {
+  background-color: var(--White);
+  width: 90%; /* Sur mobile, occupe 90% de la largeur */
+  max-width: 380px; /* Sur desktop, s'arrête à 380px de large */
+  border-radius: 20px; /* Arrondit les quatre coins de la carte */
+  overflow: hidden; /* Empêche l'image du haut de dépasser des coins arrondis */
+  text-align: center; /* Aligne tout le texte au centre par défaut */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); /* Ajoute une ombre douce pour la profondeur */
+}
+
+/* Style appliqué à l'image d'illustration en haut */
+img {
+  max-width: 100%; /* L'image ne doit jamais sortir de la carte */
+  display: block; /* Supprime l'espace vide technique sous l'image */
+}
+
+/* Conteneur pour le texte et les interactions sous l'image */
+.card-body {
+  display: flex; /* Active Flexbox pour gérer l'espacement vertical */
+  flex-direction: column; /* Aligne les éléments en colonne (les uns sous les autres) */
+  gap: 20px; /* Crée un espace uniforme de 20px entre chaque élément */
+  padding: 30px; /* Marge intérieure pour ne pas coller au bord de la carte */
+}
+
+/* Réglage spécifique pour les textes descriptifs */
+.card-body p {
+  font-weight: 500; /* Poids de police moyen */
+  opacity: 0.8; /* Légère transparence pour adoucir le gris */
+}
+
+/* Style du titre de la commande */
+.order-summary {
+  color: var(--Blue-950); /* Utilise le bleu très foncé pour le contraste */
+  font-weight: 900; /* Épaisseur de police maximale (très gras) */
+}
+
+/* --- 4. BLOC DE SÉLECTION DU PLAN --- */
+
+/* Le cadre qui contient l'icône musique, le prix et le lien */
+.plan {
+  background-color: var(--Blue-50); /* Fond bleu très pâle */
+  display: flex; /* Aligne les éléments sur une ligne */
+  align-items: center; /* Centre verticalement l'icône, le texte et le lien */
+  justify-content: space-between; /* Répartit l'espace pour pousser le lien à droite */
+  padding: 20px; /* Espace intérieur du bloc */
+  border-radius: 20px; /* Coins arrondis du bloc bleu */
+}
+
+/* Conteneur pour "Annual Plan" et le prix */
+.plan-text {
+  margin-right: auto; /* Technique Flexbox pour coller le texte contre l'icône à gauche */
+  margin-left: 20px; /* Espace entre l'icône de musique et le texte */
+  text-align: left; /* Aligne le texte à gauche à l'intérieur de son propre bloc */
+  font-weight: 500; /* Poids par défaut pour le prix */
+}
+
+/* Libellé "Annual Plan" */
+.type-plan {
+  display: block; /* Force le titre à être sur sa propre ligne (au-dessus du prix) */
+  color: var(--Blue-950); /* Couleur foncée pour ressortir */
+  font-weight: 900; /* Mise en gras importante */
+}
+
+/* --- 5. BOUTONS ET LIENS --- */
+
+/* Style de base partagé par les deux boutons */
+.btn {
+  border: none; /* Supprime la bordure grise par défaut des navigateurs */
+  border-radius: 12px; /* Arrondit les coins des boutons */
+  padding: 15px; /* Donne de la hauteur au bouton pour faciliter le clic */
+  width: 100%; /* Le bouton occupe toute la largeur du conteneur */
+  cursor: pointer; /* Change le curseur en main au survol */
+  font-weight: 900; /* Texte très gras pour l'appel à l'action */
+  font-family: inherit; /* Force le bouton à utiliser la police Red Hat du body */
+}
+
+/* Style du bouton "Proceed to Payment" */
+.btn-primary {
+  background-color: var(--Blue-700); /* Couleur bleue vibrante */
+  color: var(--White); /* Texte blanc pour le contraste */
+  box-shadow: 0 15px 15px rgba(56, 41, 224, 0.2); /* Ombre colorée pour effet "moderne" */
+}
+
+/* Style du bouton "Cancel Order" */
+.btn-secondary {
+  background-color: transparent; /* Pas de fond pour rester discret */
+  color: var(--Gray-600); /* Gris standard pour ne pas attirer l'oeil */
+}
+
+/* Style du lien "Change" */
+a {
+  color: var(--Blue-700); /* Couleur bleue pour indiquer que c'est un lien */
+  font-weight: 900; /* Mise en gras pour la visibilité */
+}
+
+/* --- 6. INTERACTIONS (SURVOL) --- */
+
+/* Au survol du bouton bleu principal */
+.btn-primary:hover {
+  opacity: 0.7; /* Devient légèrement plus clair/transparent */
+}
+
+/* Au survol du bouton secondaire */
+.btn-secondary:hover {
+  color: var(--Blue-950); /* Devient plus foncé pour montrer la sélection */
+}
+
+/* Au survol du lien Change */
+a:hover {
+  color: hsl(245, 75%, 65%); /* Change pour un bleu plus clair */
+  text-decoration: none; /* Retire le trait */
+}
+
+/* --- 7. RESPONSIVE DESIGN --- */
+
+/* Modifie le style pour les écrans de moins de 768px (tablettes et mobiles) */
+@media (min-width: 768px) {
+  body {
+    background-image: url("images/pattern-background-desktop.svg"); /* Image de fond (vague) desktop*/
+    background-size: contain; /* Assure que la vague prend toute la largeur */
+  }
+}
