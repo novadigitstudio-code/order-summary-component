@@ -110,7 +110,11 @@ img {
   display: flex; /* Aligne icône, texte et lien sur la même ligne */
   align-items: center; /* Aligne verticalement les éléments au centre */
   justify-content: space-between; /* Crée de l'espace entre les groupes d'éléments */
-  padding: 1.25rem; /* Espacement interne de 20px en rem */
+  padding: clamp(
+    1rem,
+    4vw,
+    1.25rem
+  ); /* Varie entre 16px et 20px selon l'écran */
   border-radius: 1.25rem; /* Coins arrondis de 20px en rem */
 }
 
@@ -135,7 +139,11 @@ img {
 .btn {
   border: none; /* Supprime la bordure par défaut du navigateur */
   border-radius: 0.75rem; /* Coins arrondis de 12px en rem */
-  padding: 0.9375rem; /* Hauteur interne de 15px en rem */
+  padding: clamp(
+    0.8rem,
+    3vw,
+    0.9375rem
+  ); /* Varie légèrement pour les petits écrans */
   width: 100%; /* Le bouton prend toute la largeur disponible */
   cursor: pointer; /* Change le curseur en main au survol */
   font-weight: 900; /* Texte du bouton très gras */
@@ -197,5 +205,14 @@ a:hover {
   body {
     background-image: url("images/pattern-background-desktop.svg"); /* Change pour la vague desktop */
     background-size: contain; /* Assure que le motif couvre bien la largeur */
+  }
+}
+
+/* --- 8. ACCESSIBILITÉ (ANIMATIONS) --- */
+
+/* Désactive les transitions pour les utilisateurs qui préfèrent moins de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important; /* Supprime toute animation instantanément */
   }
 }
