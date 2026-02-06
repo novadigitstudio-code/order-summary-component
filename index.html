@@ -16,35 +16,38 @@
     <title>Frontend Mentor | Order summary card</title>
   </head>
   <body>
-    <div class="card">
+    <main class="card">
       <img
         src="images/illustration-hero.svg"
         alt="Illustration of a person listening to music on a portable player while dancing against a blue background with pink musical notes flying around them."
       />
       <div class="card-body">
-        <h2 class="order-summary">Order Summary</h2>
+        <h1 class="order-summary">Order Summary</h1>
         <p>
           You can now listen to millions of songs, audiobooks, and podcasts on
           any device anywhere you like!
         </p>
         <div class="plan">
-          <img src="images/icon-music.svg" alt="" />
+          <img src="images/icon-music.svg" aria-hidden="true" />
           <div class="plan-text">
             <strong class="type-plan">Annual Plan</strong>
             <p>$59.99/year</p>
           </div>
           <a href="#">Change</a>
         </div>
-        <button class="btn btn-primary">Proceed to Payment</button>
-        <button class="btn btn-secondary">Cancel Order</button>
+        <button type="button" class="btn btn-primary">
+          Proceed to Payment
+        </button>
+        <button type="button" class="btn btn-secondary">Cancel Order</button>
       </div>
-    </div>
+    </main>
 
-    <!-- <div class="attribution">
+    <footer class="attribution">
       Challenge by
       <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
         >Frontend Mentor</a
-      >. Coded by <a href="#">Your Name Here</a>.
-    </div> -->
+      >. Coded by
+      <a href="https://github.com/novadigitstudio-code">NovaDigit Studio</a>.
+    </footer>
   </body>
 </html>

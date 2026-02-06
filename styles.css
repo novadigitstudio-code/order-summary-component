@@ -1,165 +1,201 @@
 /* --- 1. POLICE & DESIGN SYSTEM --- */
 
-/* Importation de la police Red Hat Display depuis les serveurs de Google */
+/* Importation de la police Red Hat Display depuis Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap");
 
-/* Définition des variables : permet de changer une couleur partout en une seule modif */
+/* Définition des variables : centralisation des couleurs et des ombres */
 :root {
-  --Blue-100: hsl(225, 100%, 94%); /* Couleur de fond de la page */
-  --Blue-700: hsl(245, 75%, 52%); /* Bleu principal (bouton et lien) */
-  --Blue-50: hsl(225, 100%, 98%); /* Bleu très clair (fond du bloc plan) */
-  --Gray-600: hsl(224, 23%, 55%); /* Gris pour le texte secondaire */
-  --Blue-950: hsl(223, 47%, 23%); /* Bleu foncé pour les titres et boutons */
-  --White: hsl(0, 0%, 100%); /* Blanc pur pour la carte */
+  --Blue-100: hsl(225, 100%, 94%); /* Couleur de fond principale de la page */
+  --Blue-700: hsl(245, 75%, 52%); /* Bleu vif pour les boutons et les liens */
+  --Blue-50: hsl(225, 100%, 98%); /* Bleu très pâle pour le fond du bloc plan */
+  --Gray-600: hsl(
+    224,
+    23%,
+    55%
+  ); /* Gris doux utilisé pour le texte de description */
+  --Blue-950: hsl(
+    223,
+    47%,
+    23%
+  ); /* Bleu très foncé pour les titres et boutons */
+  --White: hsl(0, 0%, 100%); /* Blanc pur utilisé pour le fond de la carte */
+  --Shadow-main: 0 20px 40px rgba(0, 0, 0, 0.1); /* Ombre portée légère pour la carte */
+  --Shadow-btn: 0 15px 15px rgba(56, 41, 224, 0.2); /* Ombre colorée spécifique au bouton */
+  --Blue-500: hsl(
+    245,
+    75%,
+    65%
+  ); /* Bleu plus clair pour les états de survol (hover) */
 }
 
 /* --- 2. RESET & BASE --- */
 
-/* Sélecteur universel pour uniformiser le comportement des navigateurs */
+/* Sélecteur universel pour supprimer les styles par défaut des navigateurs */
 * {
-  box-sizing: border-box; /* Force le calcul de la taille incluant padding et bordures */
+  box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
   margin: 0; /* Supprime les marges extérieures par défaut */
   padding: 0; /* Supprime les espacements intérieurs par défaut */
 }
 
-/* Configuration du corps de page */
+/* Configuration du corps de la page (le conteneur parent) */
 body {
   font-family:
-    "Red Hat Display", sans-serif; /* Application de la police principale */
-  background-color: var(--Blue-100); /* Couleur de secours du fond */
-  background-image: url("images/pattern-background-mobile.svg"); /* Image de fond (vague) mobile */
-  background-repeat: no-repeat; /* L'image ne doit pas se dupliquer */
-  background-size: contain; /* L'image s'étire pour remplir la largeur sans être rognée */
-  display: flex; /* Utilise Flexbox pour le positionnement */
-  justify-content: center; /* Centre la carte horizontalement */
-  align-items: center; /* Centre la carte verticalement */
-  min-height: 100vh; /* La page fait au moins toute la hauteur de l'écran */
-  color: var(--Gray-600); /* Couleur de texte par défaut pour toute la page */
-  line-height: 1.5em; /* Augmente l'espace entre les lignes pour le confort de lecture */
+    "Red Hat Display", sans-serif; /* Définit la police pour tout le site */
+  background-color: var(
+    --Blue-100
+  ); /* Applique la couleur de fond via la variable */
+  background-image: url("images/pattern-background-mobile.svg"); /* Image de fond (vague) */
+  background-repeat: no-repeat; /* Empêche l'image de fond de se répéter */
+  background-size: contain; /* L'image s'adapte à la largeur du conteneur */
+  display: flex; /* Active le mode Flexbox */
+  flex-direction: column; /* Aligne les enfants (carte et footer) verticalement */
+  justify-content: center; /* Centre le contenu sur l'axe vertical principal */
+  align-items: center; /* Centre le contenu sur l'axe horizontal secondaire */
+  min-height: 100vh; /* Force le body à faire au moins 100% de la hauteur écran */
+  color: var(--Gray-600); /* Définit la couleur de texte par défaut */
+  line-height: 1.5em; /* Définit l'interlignage pour une meilleure lecture */
+  position: relative; /* Point de référence pour le positionnement du footer */
 }
 
 /* --- 3. STRUCTURE DE LA CARTE --- */
 
-/* Le conteneur principal du composant */
+/* Le conteneur blanc qui contient tout le contenu de la commande */
 .card {
-  background-color: var(--White);
-  width: 90%; /* Sur mobile, occupe 90% de la largeur */
-  max-width: 380px; /* Sur desktop, s'arrête à 380px de large */
-  border-radius: 20px; /* Arrondit les quatre coins de la carte */
-  overflow: hidden; /* Empêche l'image du haut de dépasser des coins arrondis */
-  text-align: center; /* Aligne tout le texte au centre par défaut */
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); /* Ajoute une ombre douce pour la profondeur */
+  background-color: var(--White); /* Applique le fond blanc */
+  width: 90%; /* Prend 90% de la largeur sur les petits écrans */
+  max-width: 23.75rem; /* Largeur maximale de 380px convertie en unités relatives rem */
+  border-radius: 1.25rem; /* Arrondit les coins de la carte (20px) */
+  overflow: hidden; /* Coupe tout ce qui dépasse (comme les coins de l'image) */
+  text-align: center; /* Centre tout le texte à l'intérieur de la carte */
+  box-shadow: var(
+    --Shadow-main
+  ); /* Applique l'ombre définie dans les variables */
 }
 
-/* Style appliqué à l'image d'illustration en haut */
+/* Style pour l'image d'illustration en haut de carte */
 img {
-  max-width: 100%; /* L'image ne doit jamais sortir de la carte */
+  max-width: 100%; /* L'image ne dépasse jamais la largeur de la carte */
   display: block; /* Supprime l'espace vide technique sous l'image */
 }
 
-/* Conteneur pour le texte et les interactions sous l'image */
+/* Section contenant le texte et les boutons sous l'image */
 .card-body {
-  display: flex; /* Active Flexbox pour gérer l'espacement vertical */
-  flex-direction: column; /* Aligne les éléments en colonne (les uns sous les autres) */
-  gap: 20px; /* Crée un espace uniforme de 20px entre chaque élément */
-  padding: 30px; /* Marge intérieure pour ne pas coller au bord de la carte */
+  display: flex; /* Utilise Flexbox pour organiser le texte et les boutons */
+  flex-direction: column; /* Aligne les éléments les uns sous les autres */
+  gap: 1.25rem; /* Crée un espace de 20px entre chaque élément enfant */
+  padding: clamp(
+    1.5rem,
+    5vw,
+    2rem
+  ); /* Padding dynamique qui s'adapte à la taille de l'écran */
 }
 
-/* Réglage spécifique pour les textes descriptifs */
+/* Paragraphes à l'intérieur de la section card-body */
 .card-body p {
-  font-weight: 500; /* Poids de police moyen */
-  opacity: 0.8; /* Légère transparence pour adoucir le gris */
+  font-weight: 500; /* Définit une graisse de police moyenne */
+  opacity: 0.8; /* Réduit l'opacité pour un look plus doux */
 }
 
-/* Style du titre de la commande */
+/* Titre principal "Order Summary" */
 .order-summary {
-  color: var(--Blue-950); /* Utilise le bleu très foncé pour le contraste */
-  font-weight: 900; /* Épaisseur de police maximale (très gras) */
+  color: var(--Blue-950); /* Utilise le bleu foncé pour le contraste */
+  font-weight: 900; /* Utilise la graisse de police la plus épaisse */
 }
 
 /* --- 4. BLOC DE SÉLECTION DU PLAN --- */
 
-/* Le cadre qui contient l'icône musique, le prix et le lien */
+/* Bloc bleu contenant l'icône, le prix et le lien de modification */
 .plan {
-  background-color: var(--Blue-50); /* Fond bleu très pâle */
-  display: flex; /* Aligne les éléments sur une ligne */
-  align-items: center; /* Centre verticalement l'icône, le texte et le lien */
-  justify-content: space-between; /* Répartit l'espace pour pousser le lien à droite */
-  padding: 20px; /* Espace intérieur du bloc */
-  border-radius: 20px; /* Coins arrondis du bloc bleu */
+  background-color: var(--Blue-50); /* Fond bleu très clair */
+  display: flex; /* Aligne icône, texte et lien sur la même ligne */
+  align-items: center; /* Aligne verticalement les éléments au centre */
+  justify-content: space-between; /* Crée de l'espace entre les groupes d'éléments */
+  padding: 1.25rem; /* Espacement interne de 20px en rem */
+  border-radius: 1.25rem; /* Coins arrondis de 20px en rem */
 }
 
-/* Conteneur pour "Annual Plan" et le prix */
+/* Conteneur pour le texte du plan (nom et prix) */
 .plan-text {
-  margin-right: auto; /* Technique Flexbox pour coller le texte contre l'icône à gauche */
-  margin-left: 20px; /* Espace entre l'icône de musique et le texte */
-  text-align: left; /* Aligne le texte à gauche à l'intérieur de son propre bloc */
-  font-weight: 500; /* Poids par défaut pour le prix */
+  margin-inline-end: auto; /* Pousse le lien "Change" vers la fin de la ligne */
+  margin-inline-start: 1.25rem; /* Espace de 20px après l'icône musique */
+  text-align: left; /* Aligne le texte à gauche */
+  font-weight: 500; /* Graisse de police moyenne */
 }
 
 /* Libellé "Annual Plan" */
 .type-plan {
-  display: block; /* Force le titre à être sur sa propre ligne (au-dessus du prix) */
+  display: block; /* Force le titre à occuper sa propre ligne */
   color: var(--Blue-950); /* Couleur foncée pour ressortir */
-  font-weight: 900; /* Mise en gras importante */
+  font-weight: 900; /* Texte très gras */
 }
 
 /* --- 5. BOUTONS ET LIENS --- */
 
-/* Style de base partagé par les deux boutons */
+/* Styles communs à tous les boutons de la carte */
 .btn {
-  border: none; /* Supprime la bordure grise par défaut des navigateurs */
-  border-radius: 12px; /* Arrondit les coins des boutons */
-  padding: 15px; /* Donne de la hauteur au bouton pour faciliter le clic */
-  width: 100%; /* Le bouton occupe toute la largeur du conteneur */
+  border: none; /* Supprime la bordure par défaut du navigateur */
+  border-radius: 0.75rem; /* Coins arrondis de 12px en rem */
+  padding: 0.9375rem; /* Hauteur interne de 15px en rem */
+  width: 100%; /* Le bouton prend toute la largeur disponible */
   cursor: pointer; /* Change le curseur en main au survol */
-  font-weight: 900; /* Texte très gras pour l'appel à l'action */
-  font-family: inherit; /* Force le bouton à utiliser la police Red Hat du body */
+  font-weight: 900; /* Texte du bouton très gras */
+  font-family: inherit; /* Utilise la police Red Hat du body */
+  transition: opacity 0.2s ease; /* Animation fluide lors du changement d'opacité */
 }
 
-/* Style du bouton "Proceed to Payment" */
+/* Style spécifique au bouton de paiement principal */
 .btn-primary {
-  background-color: var(--Blue-700); /* Couleur bleue vibrante */
-  color: var(--White); /* Texte blanc pour le contraste */
-  box-shadow: 0 15px 15px rgba(56, 41, 224, 0.2); /* Ombre colorée pour effet "moderne" */
+  background-color: var(--Blue-700); /* Fond bleu vif */
+  color: var(--White); /* Texte blanc */
+  box-shadow: var(--Shadow-btn); /* Applique l'ombre bleutée dynamique */
 }
 
-/* Style du bouton "Cancel Order" */
+/* Style spécifique au bouton d'annulation secondaire */
 .btn-secondary {
   background-color: transparent; /* Pas de fond pour rester discret */
-  color: var(--Gray-600); /* Gris standard pour ne pas attirer l'oeil */
+  color: var(--Gray-600); /* Texte gris */
 }
 
-/* Style du lien "Change" */
+/* Style par défaut pour les liens (ici le lien "Change") */
 a {
-  color: var(--Blue-700); /* Couleur bleue pour indiquer que c'est un lien */
-  font-weight: 900; /* Mise en gras pour la visibilité */
+  color: var(--Blue-700); /* Couleur bleue pour signaler l'interactivité */
+  font-weight: 900; /* Texte gras */
 }
 
 /* --- 6. INTERACTIONS (SURVOL) --- */
 
-/* Au survol du bouton bleu principal */
+/* Effet au survol du bouton principal */
 .btn-primary:hover {
-  opacity: 0.7; /* Devient légèrement plus clair/transparent */
+  opacity: 0.7; /* Réduit l'opacité pour créer un effet de feedback */
 }
 
-/* Au survol du bouton secondaire */
+/* Effet au survol du bouton secondaire */
 .btn-secondary:hover {
-  color: var(--Blue-950); /* Devient plus foncé pour montrer la sélection */
+  color: var(--Blue-950); /* Le texte devient plus foncé au survol */
 }
 
-/* Au survol du lien Change */
+/* Effet au survol du lien "Change" */
 a:hover {
-  color: hsl(245, 75%, 65%); /* Change pour un bleu plus clair */
-  text-decoration: none; /* Retire le trait */
+  color: var(--Blue-500); /* Utilise la variable dédiée au survol */
+  text-decoration: none; /* Supprime le soulignement éventuel */
+}
+
+/* Style du footer (crédits et attribution) tout en bas de page */
+.attribution {
+  position: absolute; /* Sort l'élément du calcul de centrage du body */
+  bottom: 0.625rem; /* Place le footer à 10px du bord bas */
+  width: 100%; /* Permet au texte d'être bien centré sur la largeur */
+  text-align: center; /* Centre horizontalement le texte */
+  font-size: 0.6875rem; /* Taille de police réduite à 11px en rem */
 }
 
 /* --- 7. RESPONSIVE DESIGN --- */
 
-/* Modifie le style pour les écrans de moins de 768px (tablettes et mobiles) */
-@media (min-width: 768px) {
+/* Ajustements pour les écrans plus larges (Tablettes et Ordinateurs) */
+@media (min-width: 48em) {
+  /* Se déclenche à 768px (convertis en em) */
   body {
-    background-image: url("images/pattern-background-desktop.svg"); /* Image de fond (vague) desktop*/
-    background-size: contain; /* Assure que la vague prend toute la largeur */
+    background-image: url("images/pattern-background-desktop.svg"); /* Change pour la vague desktop */
+    background-size: contain; /* Assure que le motif couvre bien la largeur */
   }
 }
